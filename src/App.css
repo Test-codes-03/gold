@@ -1,0 +1,40 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+@keyframes slideRightToLeft {
+  from {
+    transform: translateX(100vw);
+  }
+  to {
+    transform: translateX(0);
+  }
+}
+
+@keyframes slideLeftToRight {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100vw);
+  }
+}
+
+.Slideanimi {
+  transform: translateY(-50%);
+}
+.slide-in {
+  animation: slideRightToLeft 1s ease-in-out forwards;
+}
+
+.slide-out {
+  animation: slideLeftToRight 1s ease-in-out forwards;
+}
+.bgcol {
+  background-color: #ffbb03;
+}

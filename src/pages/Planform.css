@@ -1,0 +1,51 @@
+.proceedtopaybtnchit {
+  background: linear-gradient(90deg, #006537 0%, #01a056 50.5%, #006e39 100%);
+}
+
+.proceedtopaybtngold {
+  background: linear-gradient(90deg, #b28800 0%, #d9a500 52.5%, #ab8200 100%);
+}
+
+.proceedtopaybtnsilver {
+  background: linear-gradient(90deg, #676767 0%, #aaa4a4 50%, #676767 100%);
+}
+.formbg {
+  background: linear-gradient(90deg, #af8a10 0%, #d9a600d8 52.5%, #af8a10 100%);
+}
+
+@keyframes moveUp {
+  from {
+    transform: translateY(100px); /* Start position (100px below) */
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0); /* End position (original position) */
+    opacity: 1;
+  }
+}
+
+.moveUp {
+  position: relative;
+  animation: moveUp 1s ease-in-out forwards;
+}
+.alert-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent backdrop */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.alert-box {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  text-align: center;
+  width: 250px;
+  height: 250px;
+}

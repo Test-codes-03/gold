@@ -1,0 +1,12 @@
+.gradientbg {
+  background: linear-gradient(90deg, #025a31 0%, #00a156 47.5%, #025a31 100%);
+}
+.bgvanmobile {
+  background: linear-gradient(90deg, #a47c00 0%, #f1b905 57.5%, #a47c00 100%);
+}
+.zindex {
+  z-index: 1500000;
+}
+.width80 {
+  width: 80%;
+}
