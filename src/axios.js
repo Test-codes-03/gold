@@ -2,6 +2,6 @@
 import axios from "axios";
 
 export const API = axios.create({
-  baseURL:'https://gold-backend-gmk0.onrender.com',
+  baseURL:'https://gold-api-sw77.onrender.com/',
   withCredentials: true,
 });
