@@ -335,7 +335,7 @@ else if (formData.select_type === "Chit Plan") {
         const base = parseFloat(pricedet?.chittu);
         setFinalPrice({
           base: base,
-          gst: 0,
+          gst: Number(gst.toFixed(2)),
           making: 0,
         });
       }
