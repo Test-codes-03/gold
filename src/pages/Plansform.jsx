@@ -145,7 +145,7 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
         const priceWithCharge = basePrice + fixedCharge;
         const gst = priceWithCharge * gstRate;
       
-        const totalAmount = priceWithCharge + gst;
+        const totalAmount = Number(priceWithCharge + gst).toFixed(2);
       
         setFormData((prev) => ({
           ...prev,
@@ -164,7 +164,7 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
         const priceWithCharge = basePrice + fixedCharge;
         const gst = priceWithCharge * gstRate;
       
-        const totalAmount = priceWithCharge + gst;
+        const totalAmount = Number(priceWithCharge + gst).toFixed(2);
 
   setFormData((prev) => ({
     ...prev,
@@ -183,7 +183,7 @@ else if (formData.select_type === "Chit Plan") {
   const priceWithCharge = basePrice + fixedCharge;
   const gst = priceWithCharge * gstRate;
 
-  const totalAmount = priceWithCharge + gst;
+  const totalAmount = Number(priceWithCharge + gst).toFixed(2);
 
   setFormData((prev) => ({
     ...prev,
@@ -310,8 +310,8 @@ else if (formData.select_type === "Chit Plan") {
         const gst = priceWithCharge * gstRate;
   
         setFinalPrice({
-          base: basePrice,
-          gst: Number(gst.toFixed(0)),
+          base: Number(basePrice).toFixed(2),
+          gst: Number(gst).toFixed(2),
           making: fixedCharge,
         });
   
@@ -325,8 +325,8 @@ else if (formData.select_type === "Chit Plan") {
         const gst = priceWithCharge * gstRate;
   
         setFinalPrice({
-          base: basePrice,
-          gst: Number(gst.toFixed(2)),
+          base: Number(basePrice).toFixed(2),
+          gst: Number(gst).toFixed(2),
           making: fixedCharge,
         });
   
@@ -340,8 +340,8 @@ else if (formData.select_type === "Chit Plan") {
         const priceWithCharge = basePrice + fixedCharge;
         const gst = priceWithCharge * gstRate;
         setFinalPrice({
-          base: basePrice,
-          gst: Number(gst.toFixed(2)),
+          base: Number(basePrice).toFixed(2),
+          gst: Number(gst).toFixed(2),
           making: fixedCharge,
         });
       }
