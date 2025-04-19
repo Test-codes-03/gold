@@ -149,7 +149,7 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
       
         setFormData((prev) => ({
           ...prev,
-          amount: totalAmount,
+          amount: totalAmount.toFixed(2),
           gst: gst.toFixed(2),
           charge: fixedCharge,
         }));
@@ -168,7 +168,7 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
 
   setFormData((prev) => ({
     ...prev,
-    amount: totalAmount,
+    amount: totalAmount.toFixed(2),
     gst: gst.toFixed(2),
     charge: fixedCharge,
   }));
@@ -187,7 +187,7 @@ else if (formData.select_type === "Chit Plan") {
 
   setFormData((prev) => ({
     ...prev,
-    amount: totalAmount,
+    amount: totalAmount.toFixed(2),
     gst: gst.toFixed(2),
     charge: fixedCharge,
   }));
@@ -310,8 +310,8 @@ else if (formData.select_type === "Chit Plan") {
         const gst = priceWithCharge * gstRate;
   
         setFinalPrice({
-          base: basePrice,
-          gst: Number(gst.toFixed(0)),
+          base: Number(basePrice.toFixed(2)),
+          gst: Number(gst.toFixed(2)),
           making: fixedCharge,
         });
   
@@ -325,7 +325,7 @@ else if (formData.select_type === "Chit Plan") {
         const gst = priceWithCharge * gstRate;
   
         setFinalPrice({
-          base: basePrice,
+          base: Number(basePrice.toFixed(2)),
           gst: Number(gst.toFixed(2)),
           making: fixedCharge,
         });
@@ -340,7 +340,7 @@ else if (formData.select_type === "Chit Plan") {
         const priceWithCharge = basePrice + fixedCharge;
         const gst = priceWithCharge * gstRate;
         setFinalPrice({
-          base: basePrice,
+          base: Number(basePrice.toFixed(2)),
           gst: Number(gst.toFixed(2)),
           making: fixedCharge,
         });
