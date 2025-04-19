@@ -304,7 +304,7 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
         });
   
       } else if (formData.select_type === "Chit Plan") {
-        const gram = value.split("0,0");
+        //const gram = value.split("0,0");
         const base = parseFloat(pricedet?.chittu);
         setFinalPrice({
           base: base,
