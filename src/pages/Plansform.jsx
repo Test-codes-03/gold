@@ -145,7 +145,7 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
         const priceWithCharge = basePrice + fixedCharge;
         const gst = priceWithCharge * gstRate;
       
-        const totalAmount = Number(priceWithCharge + gst).toFixed(2);
+        const totalAmount = priceWithCharge + gst;
       
         setFormData((prev) => ({
           ...prev,
@@ -164,7 +164,7 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
         const priceWithCharge = basePrice + fixedCharge;
         const gst = priceWithCharge * gstRate;
       
-        const totalAmount = Number(priceWithCharge + gst).toFixed(2);
+        const totalAmount = priceWithCharge + gst;
 
   setFormData((prev) => ({
     ...prev,
@@ -183,7 +183,7 @@ else if (formData.select_type === "Chit Plan") {
   const priceWithCharge = basePrice + fixedCharge;
   const gst = priceWithCharge * gstRate;
 
-  const totalAmount = Number(priceWithCharge + gst).toFixed(2);
+  const totalAmount = priceWithCharge + gst;
 
   setFormData((prev) => ({
     ...prev,
@@ -202,7 +202,7 @@ else if (formData.select_type === "Chit Plan") {
       var options = {
         key: process.env.REACT_APP_RAZORPAY_KEY, // Replace with your Razorpay Key ID
         key_secret: process.env.REACT_APP_RAZORPAY_SECRET_KEY, // Replace with your Razorpay Key ID
-        amount: Number(formData.amount).toFixed(2) * 100, // Amount in paisa (50000 = 500 INR)
+        amount: Math.round(parseFloat(formData.amount) * 100), // Amount in paisa (50000 = 500 INR)
         currency: "INR",
         name: "Salem Jewellery",
         description: "Test Transaction",
@@ -310,8 +310,8 @@ else if (formData.select_type === "Chit Plan") {
         const gst = priceWithCharge * gstRate;
   
         setFinalPrice({
-          base: Number(basePrice).toFixed(2),
-          gst: Number(gst).toFixed(2),
+          base: basePrice,
+          gst: Number(gst.toFixed(0)),
           making: fixedCharge,
         });
   
@@ -325,8 +325,8 @@ else if (formData.select_type === "Chit Plan") {
         const gst = priceWithCharge * gstRate;
   
         setFinalPrice({
-          base: Number(basePrice).toFixed(2),
-          gst: Number(gst).toFixed(2),
+          base: basePrice,
+          gst: Number(gst.toFixed(2)),
           making: fixedCharge,
         });
   
@@ -340,8 +340,8 @@ else if (formData.select_type === "Chit Plan") {
         const priceWithCharge = basePrice + fixedCharge;
         const gst = priceWithCharge * gstRate;
         setFinalPrice({
-          base: Number(basePrice).toFixed(2),
-          gst: Number(gst).toFixed(2),
+          base: basePrice,
+          gst: Number(gst.toFixed(2)),
           making: fixedCharge,
         });
       }
