@@ -44,6 +44,8 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
     select_type: pageheading,
     schemes: "",
     paymentId: "",
+    gst:"0",
+    charge:"0",
   });
 
   useEffect(() => {
@@ -106,7 +108,7 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
           }
         }
         break;
-      case "Scheme":
+      case "schemes":
         if (value === "") {
           error = "Select Plan ...";
         }
@@ -136,19 +138,23 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
     try {
       if (formData.select_type === "Gold Plan") {
         const gram = formData.schemes.split("g");
-        
         const basePrice = parseFloat(gram?.[0]) * parseFloat(pricedet?.golden);
-
+      
         const fixedCharge = 200;
         const gstRate = 0.03;
-      
         const priceWithCharge = basePrice + fixedCharge;
         const gst = priceWithCharge * gstRate;
       
-        formData.amount = priceWithCharge + gst;
-
-        //console.log("Selected Plan: Gold Plan", "Base Price:", basePrice, "GST:", gst, "Fixed Charge:", fixedCharge, "Final Amount:", formData.amount);
-      } else if (formData.select_type === "Silver Plan") {
+        const totalAmount = priceWithCharge + gst;
+      
+        setFormData((prev) => ({
+          ...prev,
+          amount: totalAmount,
+          gst: gst.toFixed(2),
+          charge: fixedCharge,
+        }));
+      }
+      else if (formData.select_type === "Silver Plan") {
         const gram = formData.schemes.split("g");
         const basePrice = parseFloat(gram?.[0]) * parseFloat(pricedet?.silver);
 
@@ -158,15 +164,28 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
         const priceWithCharge = basePrice + fixedCharge;
         const gst = priceWithCharge * gstRate;
       
-        formData.amount = priceWithCharge + gst;
+        const totalAmount = priceWithCharge + gst;
 
-        //console.log("Selected Plan: Silver Plan", "Price:", pricedet?.silver);
-      } else if (formData.select_type === "Chit Plan") {
+  setFormData((prev) => ({
+    ...prev,
+    amount: totalAmount,
+    gst: gst.toFixed(2),
+    charge: fixedCharge,
+  }));
+}
+ else if (formData.select_type === "Chit Plan") {
         const gram = formData.schemes.split("0,0");
-        formData.amount = gram?.[0] * parseFloat(pricedet?.chittu);
-        console.log("Selected Plan: Chit Plan", "Price:", pricedet?.chittu);
+        
+        const totalAmount = gram?.[0] * parseFloat(pricedet?.chittu);
 
-      }
+  setFormData((prev) => ({
+    ...prev,
+    amount: totalAmount,
+    gst: gst.toFixed(2),
+    charge: fixedCharge,
+  }));
+}
+       
       if (!formData.amount) {
         saveres("Invalid Amount");
         return;
@@ -304,7 +323,7 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
         });
   
       } else if (formData.select_type === "Chit Plan") {
-        //const gram = value.split("0,0");
+        const gram = value.split("0,0");
         const base = parseFloat(pricedet?.chittu);
         setFinalPrice({
           base: base,
