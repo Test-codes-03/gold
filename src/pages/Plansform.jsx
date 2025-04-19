@@ -332,11 +332,17 @@ else if (formData.select_type === "Chit Plan") {
   
       } else if (formData.select_type === "Chit Plan") {
         //const gram = value.split("0,0");
-        const base = parseFloat(pricedet?.chittu);
+
+        const basePrice = parseFloat(pricedet?.chittu);
+        const fixedCharge = 0;
+        const gstRate = 0.03;
+  
+        const priceWithCharge = basePrice + fixedCharge;
+        const gst = priceWithCharge * gstRate;
         setFinalPrice({
-          base: base,
+          base: basePrice,
           gst: Number(gst.toFixed(2)),
-          making: 0,
+          making: fixedCharge,
         });
       }
     }
