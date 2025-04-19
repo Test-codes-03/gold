@@ -1,3 +1,5 @@
+//src/pages/Platform.jsx
+
 import React, { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import herobg from "../Assets/images/herobg.png";
@@ -18,7 +20,11 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
     silver: "",
     chittu: "",
   });
-
+  const [finalPrice,setFinalPrice] = useState({
+    base:"0",
+    gst:"0",
+    making:"0"
+  })
   const [error, seterror] = useState({
     _id: "",
     name: "",
@@ -140,25 +146,26 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
         const gst = priceWithCharge * gstRate;
       
         formData.amount = priceWithCharge + gst;
-      
-        console.log("Selected Plan: Gold Plan", "Base Price:", basePrice, "GST:", gst, "Fixed Charge:", fixedCharge, "Final Amount:", formData.amount);
+
+        //console.log("Selected Plan: Gold Plan", "Base Price:", basePrice, "GST:", gst, "Fixed Charge:", fixedCharge, "Final Amount:", formData.amount);
       } else if (formData.select_type === "Silver Plan") {
         const gram = formData.schemes.split("g");
         const basePrice = parseFloat(gram?.[0]) * parseFloat(pricedet?.silver);
 
-        const fixedCharge = 200;
+        const fixedCharge = 60;
         const gstRate = 0.03;
       
         const priceWithCharge = basePrice + fixedCharge;
         const gst = priceWithCharge * gstRate;
       
         formData.amount = priceWithCharge + gst;
-       
-        console.log("Selected Plan: Silver Plan", "Price:", pricedet?.silver);
+
+        //console.log("Selected Plan: Silver Plan", "Price:", pricedet?.silver);
       } else if (formData.select_type === "Chit Plan") {
         const gram = formData.schemes.split("0,0");
         formData.amount = gram?.[0] * parseFloat(pricedet?.chittu);
         console.log("Selected Plan: Chit Plan", "Price:", pricedet?.chittu);
+
       }
       if (!formData.amount) {
         saveres("Invalid Amount");
@@ -265,6 +272,47 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
       ...preverr,
       [name]: err,
     }));
+    if (name === "schemes") {
+      if (formData.select_type === "Gold Plan") {
+        const gram = value.split("g");
+        const basePrice = parseFloat(gram?.[0]) * parseFloat(pricedet?.golden);
+        const fixedCharge = 200;
+        const gstRate = 0.03;
+  
+        const priceWithCharge = basePrice + fixedCharge;
+        const gst = priceWithCharge * gstRate;
+  
+        setFinalPrice({
+          base: basePrice,
+          gst: Number(gst.toFixed(0)),
+          making: fixedCharge,
+        });
+  
+      } else if (formData.select_type === "Silver Plan") {
+        const gram = value.split("g");
+        const basePrice = parseFloat(gram?.[0]) * parseFloat(pricedet?.silver);
+        const fixedCharge = 60;
+        const gstRate = 0.03;
+  
+        const priceWithCharge = basePrice + fixedCharge;
+        const gst = priceWithCharge * gstRate;
+  
+        setFinalPrice({
+          base: basePrice,
+          gst: Number(gst.toFixed(2)),
+          making: fixedCharge,
+        });
+  
+      } else if (formData.select_type === "Chit Plan") {
+        const gram = value.split("0,0");
+        const base = parseFloat(pricedet?.chittu);
+        setFinalPrice({
+          base: base,
+          gst: 0,
+          making: 0,
+        });
+      }
+    }
   };
   return (
     <>
@@ -374,6 +422,7 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
                 Plan
                 <span className="text-red-600">*</span>
               </label>
+
               {/* <div>
             <CustomDropdown
               options={planlist}
@@ -406,7 +455,20 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
                 <p className="text-red-600 text-xs">{error.schemes}</p>
               )}
             </div>
-
+              <div>
+                <p>
+                  base price:{finalPrice.base}
+                </p>
+                <p>
+                  gst price 3%:{Number(finalPrice.gst).toFixed(2)}
+                </p>   
+                <p>
+                  making charge :{finalPrice.making}
+                </p>
+                <p>
+                  Total charge :{finalPrice.making+finalPrice.gst+finalPrice.base}
+                </p>
+              </div>
             <p className="text-center text-red-600">{saveres}</p>
             <div className="flex flex-col">
               <button
