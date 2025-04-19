@@ -173,10 +173,17 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
     charge: fixedCharge,
   }));
 }
- else if (formData.select_type === "Chit Plan") {
-        const gram = formData.schemes.split("0,0");
-        
-        const totalAmount = gram?.[0] * parseFloat(pricedet?.chittu);
+else if (formData.select_type === "Chit Plan") {
+  const gram = formData.schemes.split("0,0");
+
+  const basePrice = parseFloat(gram?.[0]) * parseFloat(pricedet?.chittu);
+  const fixedCharge = 0; // Or any default chit charge you want
+  const gstRate = 0.03;
+
+  const priceWithCharge = basePrice + fixedCharge;
+  const gst = priceWithCharge * gstRate;
+
+  const totalAmount = priceWithCharge + gst;
 
   setFormData((prev) => ({
     ...prev,
@@ -185,6 +192,7 @@ const Plansform = ({ planlist, pageheading, btnclass }) => {
     charge: fixedCharge,
   }));
 }
+
        
       if (!formData.amount) {
         saveres("Invalid Amount");
