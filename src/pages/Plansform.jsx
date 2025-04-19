@@ -202,7 +202,7 @@ else if (formData.select_type === "Chit Plan") {
       var options = {
         key: process.env.REACT_APP_RAZORPAY_KEY, // Replace with your Razorpay Key ID
         key_secret: process.env.REACT_APP_RAZORPAY_SECRET_KEY, // Replace with your Razorpay Key ID
-        amount: parseFloat(formData.amount).toFixed(2) * 100, // Amount in paisa (50000 = 500 INR)
+        amount: Number(formData.amount).toFixed(2) * 100, // Amount in paisa (50000 = 500 INR)
         currency: "INR",
         name: "Salem Jewellery",
         description: "Test Transaction",
