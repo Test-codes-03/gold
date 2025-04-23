@@ -59,7 +59,7 @@ function App() {
               path="/Home/Chitform"
               element={
                 <Plansform
-                  planlist={["10,00000", "20,00000", "50,00000"]}
+                  planlist={["10,000", "20,000", "50,000"]}
                   pageheading="Chit Plan"
                   btnclass="proceedtopaybtnchit"
                 />
